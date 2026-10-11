@@ -1,0 +1,128 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    color-scheme: dark;
+  }
+  body {
+    @apply bg-forge-950 font-sans text-forge-200 antialiased;
+    background-image:
+      radial-gradient(60rem 40rem at 85% -10%, rgba(155, 107, 255, 0.16), transparent 60%),
+      radial-gradient(50rem 30rem at -10% 10%, rgba(255, 79, 216, 0.12), transparent 60%),
+      radial-gradient(40rem 30rem at 50% 120%, rgba(62, 231, 255, 0.08), transparent 60%);
+    background-attachment: fixed;
+  }
+  ::selection {
+    background: rgba(255, 79, 216, 0.35);
+  }
+  :focus-visible {
+    outline: 2px solid #3ee7ff;
+    outline-offset: 2px;
+  }
+}
+
+@layer components {
+  .btn {
+    @apply inline-flex items-center justify-center gap-2 rounded-xl px-3.5 py-2 text-sm font-medium transition disabled:cursor-not-allowed disabled:opacity-40;
+  }
+  .btn-primary {
+    @apply btn bg-gradient-to-r from-neon-pink to-neon-violet text-white shadow-glow hover:brightness-110;
+  }
+  .btn-ghost {
+    @apply btn border border-forge-700 bg-forge-900/60 text-forge-200 hover:border-forge-500 hover:text-white;
+  }
+  .btn-icon {
+    @apply grid h-9 w-9 place-items-center rounded-xl border border-forge-700 bg-forge-900/60 text-forge-200 transition hover:border-forge-500 hover:text-white disabled:cursor-not-allowed disabled:opacity-30;
+  }
+  .text-gradient {
+    @apply bg-gradient-to-r from-neon-pink via-neon-violet to-neon-cyan bg-clip-text text-transparent;
+  }
+}
+
+/* Range input */
+.nx-range {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 100%;
+  height: 6px;
+  border-radius: 999px;
+  background: linear-gradient(90deg, #ff4fd8, #9b6bff var(--pct, 50%), #241f47 var(--pct, 50%));
+  cursor: pointer;
+}
+.nx-range::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 18px;
+  height: 18px;
+  border-radius: 999px;
+  background: #fff;
+  border: 3px solid #ff4fd8;
+  box-shadow: 0 0 12px rgba(255, 79, 216, 0.6);
+}
+.nx-range::-moz-range-thumb {
+  width: 14px;
+  height: 14px;
+  border-radius: 999px;
+  background: #fff;
+  border: 3px solid #ff4fd8;
+}
+
+/* Avatar animations (SVG transforms need fill-box origins). */
+.nx-blink {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: blink 4.5s infinite;
+}
+.nx-breathe {
+  animation: breathe 4s ease-in-out infinite;
+}
+.nx-talk {
+  transform-box: fill-box;
+  transform-origin: 50% 0;
+  animation: talk 0.22s ease-in-out infinite;
+}
+.nx-pulse {
+  animation: pulseGlow 2.6s ease-in-out infinite;
+}
+.nx-float {
+  animation: breathe 3s ease-in-out infinite;
+}
+.nx-scan {
+  animation: scan 6s linear infinite;
+}
+@keyframes blink {
+  0%, 92%, 100% { transform: scaleY(1); }
+  95% { transform: scaleY(0.08); }
+}
+@keyframes breathe {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-2px); }
+}
+@keyframes talk {
+  0%, 100% { transform: scaleY(1); }
+  50% { transform: scaleY(1.45); }
+}
+@keyframes pulseGlow {
+  0%, 100% { opacity: 0.55; }
+  50% { opacity: 1; }
+}
+@keyframes scan {
+  from { transform: translateY(0); }
+  to { transform: translateY(16px); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .nx-blink, .nx-breathe, .nx-talk, .nx-pulse, .nx-float, .nx-scan, .animate-bar {
+    animation: none !important;
+  }
+}
+
+/* Thin scrollbars inside panels */
+.nx-scroll::-webkit-scrollbar { height: 6px; width: 6px; }
+.nx-scroll::-webkit-scrollbar-thumb { background: #332c63; border-radius: 999px; }
+
+@media print {
+  body { background: #fff; color: #000; }
+  .no-print { display: none !important; }
+}
